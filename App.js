@@ -22,6 +22,11 @@ export default function App() {
     setTexto('');
   }
 
+  function remover(id) {
+    // filter devolve um novo array sem o item removido
+    setItens(itens.filter((item) => item.id !== id));
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -46,6 +51,12 @@ export default function App() {
         renderItem={({ item }) => (
           <View style={styles.item}>
             <Text style={styles.textoItem}>{item.nome}</Text>
+            <TouchableOpacity
+              style={styles.botaoRemover}
+              onPress={() => remover(item.id)}
+            >
+              <Text style={styles.textoBotao}>Remover</Text>
+            </TouchableOpacity>
           </View>
         )}
       />
@@ -92,12 +103,23 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   item: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     backgroundColor: '#f2f2f2',
     borderRadius: 8,
     padding: 14,
     marginBottom: 10,
   },
   textoItem: {
+    flex: 1,
     fontSize: 18,
+  },
+  botaoRemover: {
+    backgroundColor: '#c62828',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    marginLeft: 10,
   },
 });
